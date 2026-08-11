@@ -25,36 +25,23 @@
 
       <nav class="hidden md:flex items-center gap-8">
         <a href="#informasi" class="nav-link">Informasi</a>
-        <a href="#syarat" class="nav-link">Persyaratan</a>
         <a href="#formulir" class="nav-link">Formulir Pendaftaran</a>
         <a href="#kontak" class="nav-link">Kontak</a>
       </nav>
-
-      <button id="mobileMenuButton" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Toggle Menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-      </button>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
-      <a href="#informasi" class="block mobile-link">Informasi</a>
-      <a href="#syarat" class="block mobile-link">Persyaratan</a>
-      <a href="#formulir" class="block mobile-link">Formulir Pendaftaran</a>
-      <a href="#kontak" class="block mobile-link">Kontak</a>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="py-12 md:py-20 bg-gradient-to-b from-emerald-50/50 to-transparent">
+  <section id="informasi" class="py-12 md:py-16 bg-gradient-to-b from-emerald-50/50 to-transparent">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <span class="section-label">Penerimaan Mahasiswa Baru</span>
-      <h2 class="section-title">Selamat Datang Calon Mahasiswa Baru Fakultas Pertanian</h2>
-      <p class="section-copy mx-auto">Bergabunglah bersama kami untuk mencetak generasi unggul, inovatif, dan mandiri di bidang pertanian modern dan perikanan.</p>
+      <span class="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-semibold rounded-full mb-3">Penerimaan Mahasiswa Baru</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Selamat Datang Calon Mahasiswa Baru</h2>
+      <p class="text-slate-600 mt-2 max-w-2xl mx-auto">Bergabunglah bersama Fakultas Pertanian UM Berau untuk mencetak generasi unggul, inovatif, dan mandiri di bidang pertanian modern dan perikanan.</p>
     </div>
   </section>
 
   <!-- Formulir Pendaftaran -->
-  <section id="formulir" class="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="formulir" class="py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-slate-100">
       <div class="text-center mb-8">
         <h3 class="text-2xl font-bold text-slate-900">Formulir Pendaftaran PMB</h3>
@@ -71,18 +58,18 @@
           <h4 class="font-bold text-emerald-800 border-b pb-2">1. Data Diri Calon Mahasiswa</h4>
           
           <div class="field-group">
-            <label class="field-label" for="namaLengkap">Nama Lengkap *</label>
-            <input type="text" id="namaLengkap" name="namaLengkap" class="field-input" placeholder="Masukkan nama lengkap" required>
+            <label class="block text-sm font-semibold text-slate-700 mb-1" for="namaLengkap">Nama Lengkap *</label>
+            <input type="text" id="namaLengkap" name="namaLengkap" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="Masukkan nama lengkap" required>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="field-group">
-              <label class="field-label" for="nik">NIK (Nomor Induk Kependudukan) *</label>
-              <input type="text" id="nik" name="nik" class="field-input" placeholder="16 digit NIK" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="nik">NIK (Nomor Induk Kependudukan) *</label>
+              <input type="text" id="nik" name="nik" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="16 digit NIK" required>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="jenisKelamin">Jenis Kelamin *</label>
-              <select id="jenisKelamin" name="jenisKelamin" class="field-input" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="jenisKelamin">Jenis Kelamin *</label>
+              <select id="jenisKelamin" name="jenisKelamin" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" required>
                 <option value="">-- Pilih Jenis Kelamin --</option>
                 <option value="Laki-laki">Laki-laki</option>
                 <option value="Perempuan">Perempuan</option>
@@ -91,24 +78,24 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="field-group">
-              <label class="field-label" for="tempatLahir">Tempat Lahir *</label>
-              <input type="text" id="tempatLahir" name="tempatLahir" class="field-input" placeholder="Kota lahir" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="tempatLahir">Tempat Lahir *</label>
+              <input type="text" id="tempatLahir" name="tempatLahir" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="Kota lahir" required>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="tanggalLahir">Tanggal Lahir *</label>
-              <input type="date" id="tanggalLahir" name="tanggalLahir" class="field-input" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="tanggalLahir">Tanggal Lahir *</label>
+              <input type="date" id="tanggalLahir" name="tanggalLahir" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" required>
             </div>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="field-group">
-              <label class="field-label" for="whatsapp">No. WhatsApp / Telepon *</label>
-              <input type="tel" id="whatsapp" name="whatsapp" class="field-input" placeholder="08xxxxxxxxxx" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="whatsapp">No. WhatsApp / Telepon *</label>
+              <input type="tel" id="whatsapp" name="whatsapp" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="08xxxxxxxxxx" required>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="email">Alamat Email *</label>
-              <input type="email" id="email" name="email" class="field-input" placeholder="email@domain.com" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="email">Alamat Email *</label>
+              <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="email@domain.com" required>
             </div>
           </div>
         </div>
@@ -117,9 +104,9 @@
         <div class="space-y-4 pt-4">
           <h4 class="font-bold text-emerald-800 border-b pb-2">2. Program Studi & Asal Sekolah</h4>
 
-          <div class="field-group">
-            <label class="field-label" for="programStudi">Pilihan Program Studi *</label>
-            <select id="programStudi" name="programStudi" class="field-input" required>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1" for="programStudi">Pilihan Program Studi *</label>
+            <select id="programStudi" name="programStudi" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" required>
               <option value="">-- Pilih Program Studi --</option>
               <option value="Agroteknologi">Agroteknologi</option>
               <option value="Agribisnis">Agribisnis</option>
@@ -127,19 +114,19 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="field-group">
-              <label class="field-label" for="asalSekolah">Asal Sekolah *</label>
-              <input type="text" id="asalSekolah" name="asalSekolah" class="field-input" placeholder="SMA / SMK / MA..." required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="asalSekolah">Asal Sekolah *</label>
+              <input type="text" id="asalSekolah" name="asalSekolah" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="SMA / SMK / MA..." required>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="tahunLulus">Tahun Lulus *</label>
-              <input type="number" id="tahunLulus" name="tahunLulus" class="field-input" placeholder="2026" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="tahunLulus">Tahun Lulus *</label>
+              <input type="number" id="tahunLulus" name="tahunLulus" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="2026" required>
             </div>
           </div>
 
-          <div class="field-group">
-            <label class="field-label" for="alamat">Alamat Lengkap *</label>
-            <textarea id="alamat" name="alamat" rows="3" class="field-input" placeholder="Alamat domisili saat ini" required></textarea>
+          <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1" for="alamat">Alamat Lengkap *</label>
+            <textarea id="alamat" name="alamat" rows="3" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-600" placeholder="Alamat domisili saat ini" required></textarea>
           </div>
         </div>
 
@@ -148,21 +135,21 @@
           <h4 class="font-bold text-emerald-800 border-b pb-2">3. Unggah Dokumen Pendukung</h4>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="field-group">
-              <label class="field-label" for="pasfoto">Pasfoto Terbaru *</label>
-              <input type="file" id="pasfoto" name="pasfoto" class="field-file" accept="image/*" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="pasfoto">Pasfoto Terbaru *</label>
+              <input type="file" id="pasfoto" name="pasfoto" class="w-full px-3 py-2 border rounded-xl" accept="image/*" required>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="ktp">KTP / Kartu Pelajar *</label>
-              <input type="file" id="ktp" name="ktp" class="field-file" accept="image/*,application/pdf" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="ktp">KTP / Kartu Pelajar *</label>
+              <input type="file" id="ktp" name="ktp" class="w-full px-3 py-2 border rounded-xl" accept="image/*,application/pdf" required>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="sklIjazah">SKL / Ijazah *</label>
-              <input type="file" id="sklIjazah" name="sklIjazah" class="field-file" accept="image/*,application/pdf" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="sklIjazah">SKL / Ijazah *</label>
+              <input type="file" id="sklIjazah" name="sklIjazah" class="w-full px-3 py-2 border rounded-xl" accept="image/*,application/pdf" required>
             </div>
-            <div class="field-group">
-              <label class="field-label" for="kartuKeluarga">Kartu Keluarga (KK) *</label>
-              <input type="file" id="kartuKeluarga" name="kartuKeluarga" class="field-file" accept="image/*,application/pdf" required>
+            <div>
+              <label class="block text-sm font-semibold text-slate-700 mb-1" for="kartuKeluarga">Kartu Keluarga (KK) *</label>
+              <input type="file" id="kartuKeluarga" name="kartuKeluarga" class="w-full px-3 py-2 border rounded-xl" accept="image/*,application/pdf" required>
             </div>
           </div>
         </div>
@@ -176,6 +163,51 @@
         </div>
 
       </form>
+    </div>
+  </section>
+
+  <!-- BAGIAN KONTAK PANITIA (DENGAN NOMOR KONTAK DAN WHATSAPP) -->
+  <section id="kontak" class="py-12 bg-white border-t border-slate-200 mt-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h3 class="text-2xl font-bold text-slate-900 mb-2">Kontak Panitia PMB</h3>
+      <p class="text-slate-600 text-sm mb-8">Memiliki pertanyaan seputar pendaftaran? Silakan hubungi panitia PMB Fakultas Pertanian Universitas Muhammadiyah Berau melalui kontak di bawah ini:</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left max-w-2xl mx-auto">
+        
+        <!-- Kontak WhatsApp Admin 1 -->
+        <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center gap-4 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-emerald-800 text-white flex items-center justify-center font-bold text-xl">
+            📱
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-900 text-sm">Panitia PMB (Admin 1)</h4>
+            <p class="text-xs text-slate-500 mb-1">WhatsApp & Telepon</p>
+            <a href="https://wa.me/6281234567890" target="_blank" class="text-emerald-800 font-bold text-sm hover:underline">
+              +62 812-5400-4021
+            </a>
+          </div>
+        </div>
+
+        <!-- Kontak WhatsApp Admin 2 -->
+        <div class="p-5 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center gap-4 shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-emerald-800 text-white flex items-center justify-center font-bold text-xl">
+            💬
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-900 text-sm">Panitia PMB (Admin 2)</h4>
+            <p class="text-xs text-slate-500 mb-1">WhatsApp Only</p>
+            <a href="https://wa.me/6285815763550" target="_blank" class="text-emerald-800 font-bold text-sm hover:underline">
+              +62 858-1576-3550
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-8 text-xs text-slate-400">
+        <p>Alamat Kampus: Universitas Muhammadiyah Berau, Tanjung Redeb, Berau, Kalimantan Timur.</p>
+        <p class="mt-1">&copy; 2026 PMB Fakultas Pertanian UM Berau. All rights reserved.</p>
+      </div>
     </div>
   </section>
 
