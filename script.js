@@ -35,8 +35,8 @@ function readFileAsDataURL(file) {
 
 async function serializeFile(fileInputId) {
   const input = document.getElementById(fileInputId);
+  if (!input || !input.files || !input.files[0]) return null;
   const file = input.files[0];
-  if (!file) return null;
 
   const dataUrl = await readFileAsDataURL(file);
   const base64 = String(dataUrl).split(",")[1];
@@ -87,22 +87,24 @@ form.addEventListener("submit", async function(event) {
   hideAlert();
 
   try {
-    setSubmitting(true, "Sedang menyiapkan data dan mengunggah berkas...");
+    setSubmitting(true, "Sedang menyiapkan data dan berkas...");
     const payload = await buildPayload();
 
-    statusText.textContent = "Mengirim data ke server Google...";
+    statusText.textContent = "Mengirim data ke Google Sheets & Drive...";
 
+    // Menggunakan mode no-cors agar tidak diblokir browser
     await fetch(SCRIPT_URL, {
       method: "POST",
+      mode: "no-cors",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload),
     });
 
     form.reset();
-    showAlert("success", "Pendaftaran berhasil dikirim! Data Anda sedang diproses oleh panitia.");
-    statusText.textContent = "Pengiriman berhasil.";
+    showAlert("success", "Pendaftaran berhasil dikirim! Silakan cek Google Sheet & Drive Anda.");
+    statusText.textContent = "Pengiriman selesai.";
   } catch (error) {
-    showAlert("error", "Terjadi kesalahan saat mengirim data. Silakan coba lagi.");
+    showAlert("error", "Terjadi kesalahan koneksi. Silakan coba lagi.");
     statusText.textContent = "Pengiriman gagal.";
   } finally {
     setSubmitting(false, statusText.textContent);
