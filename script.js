@@ -1,32 +1,14 @@
-const SCRIPT_URL = "URL_GOOGLE_APPS_SCRIPT_ANDA";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbysyDAEI98iBKOS133NRVCdXpF-qGl13R__sKe_zBM4GJG2ELEBmMJ08K03hU8p1Qay/exec";
 
 const form = document.getElementById("registrationForm");
 const submitButton = document.getElementById("submitButton");
 const submitButtonText = document.getElementById("submitButtonText");
 const statusText = document.getElementById("statusText");
 const alertBox = document.getElementById("alertBox");
-const mobileMenuButton = document.getElementById("mobileMenuButton");
-const mobileMenu = document.getElementById("mobileMenu");
-const mobileLinks = document.querySelectorAll(".mobile-link");
-const siteLogo = document.getElementById("siteLogo");
-const siteLogoFallback = document.getElementById("siteLogoFallback");
-const heroImage = document.getElementById("heroImage");
-const heroImageFallback = document.getElementById("heroImageFallback");
-
-function toggleMobileMenu() {
-  const isHidden = mobileMenu.classList.contains("hidden");
-  mobileMenu.classList.toggle("hidden");
-  mobileMenuButton.setAttribute("aria-expanded", String(isHidden));
-}
-
-function closeMobileMenu() {
-  mobileMenu.classList.add("hidden");
-  mobileMenuButton.setAttribute("aria-expanded", "false");
-}
 
 function showAlert(type, message) {
-  alertBox.className = "rounded-2xl border px-4 py-3 text-sm font-medium";
-  alertBox.classList.add(type === "success" ? "alert-success" : "alert-error");
+  alertBox.className = "mb-6 rounded-2xl border px-4 py-3 text-sm font-medium";
+  alertBox.classList.add(type === "success" ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-red-50 border-red-200 text-red-800");
   alertBox.textContent = message;
   alertBox.classList.remove("hidden");
 }
@@ -39,39 +21,14 @@ function hideAlert() {
 function setSubmitting(isSubmitting, message) {
   submitButton.disabled = isSubmitting;
   submitButtonText.textContent = isSubmitting ? "Memproses..." : "Kirim Pendaftaran";
-  submitButton.classList.toggle("loading", isSubmitting);
   statusText.textContent = message;
-}
-
-function setupImageFallback(imageElement, fallbackElement, options = {}) {
-  if (!imageElement || !fallbackElement) {
-    return;
-  }
-
-  const { onMissing } = options;
-
-  function showFallback() {
-    imageElement.classList.add("hidden");
-    fallbackElement.classList.remove("hidden");
-    if (typeof onMissing === "function") {
-      onMissing();
-    }
-  }
-
-  imageElement.addEventListener("error", showFallback);
-
-  if (imageElement.complete && imageElement.naturalWidth === 0) {
-    showFallback();
-  }
 }
 
 function readFileAsDataURL(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-
     reader.onload = () => resolve(reader.result);
     reader.onerror = () => reject(new Error(`Gagal membaca file ${file.name}`));
-
     reader.readAsDataURL(file);
   });
 }
@@ -79,10 +36,7 @@ function readFileAsDataURL(file) {
 async function serializeFile(fileInputId) {
   const input = document.getElementById(fileInputId);
   const file = input.files[0];
-
-  if (!file) {
-    throw new Error(`File untuk ${input.name} belum dipilih.`);
-  }
+  if (!file) return null;
 
   const dataUrl = await readFileAsDataURL(file);
   const base64 = String(dataUrl).split(",")[1];
@@ -91,8 +45,6 @@ async function serializeFile(fileInputId) {
     fieldName: input.name,
     fileName: file.name,
     mimeType: file.type || "application/octet-stream",
-    size: file.size,
-    dataUrl,
     base64,
   };
 }
@@ -106,13 +58,12 @@ async function buildPayload() {
     serializeFile("kartuKeluarga"),
   ]);
 
-  const documents = uploadedFiles.reduce((accumulator, fileItem) => {
-    accumulator[fileItem.fieldName] = fileItem;
-    return accumulator;
-  }, {});
+  const documents = {};
+  uploadedFiles.forEach(fileItem => {
+    if (fileItem) documents[fileItem.fieldName] = fileItem;
+  });
 
   return {
-    source: "Website PMB Fakultas Pertanian UM Berau",
     submittedAt: new Date().toISOString(),
     applicant: {
       namaLengkap: formData.get("namaLengkap"),
@@ -131,67 +82,29 @@ async function buildPayload() {
   };
 }
 
-async function submitRegistration(event) {
+form.addEventListener("submit", async function(event) {
   event.preventDefault();
   hideAlert();
-
-  if (SCRIPT_URL === "URL_GOOGLE_APPS_SCRIPT_ANDA") {
-    showAlert("error", "Silakan isi variabel SCRIPT_URL di file script.js dengan URL Web App Google Apps Script Anda.");
-    statusText.textContent = "Konfigurasi SCRIPT_URL belum diisi.";
-    return;
-  }
 
   try {
     setSubmitting(true, "Sedang menyiapkan data dan mengunggah berkas...");
     const payload = await buildPayload();
 
-    statusText.textContent = "Mengirim data ke server Google Apps Script...";
+    statusText.textContent = "Mengirim data ke server Google...";
 
-    const response = await fetch(SCRIPT_URL, {
+    await fetch(SCRIPT_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8",
-      },
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload),
     });
 
-    const responseText = await response.text();
-    let result = {};
-
-    try {
-      result = responseText ? JSON.parse(responseText) : {};
-    } catch (parseError) {
-      result = { rawResponse: responseText };
-    }
-
-    if (!response.ok || result.success === false) {
-      throw new Error(result.message || "Terjadi kegagalan saat mengirim data pendaftaran.");
-    }
-
     form.reset();
-    showAlert("success", "Pendaftaran berhasil dikirim. Panitia akan memverifikasi data Anda secepatnya.");
+    showAlert("success", "Pendaftaran berhasil dikirim! Data Anda sedang diproses oleh panitia.");
     statusText.textContent = "Pengiriman berhasil.";
   } catch (error) {
-    showAlert("error", error.message || "Terjadi kesalahan yang tidak diketahui.");
-    statusText.textContent = "Pengiriman gagal. Silakan cek koneksi atau konfigurasi Apps Script.";
+    showAlert("error", "Terjadi kesalahan saat mengirim data. Silakan coba lagi.");
+    statusText.textContent = "Pengiriman gagal.";
   } finally {
     setSubmitting(false, statusText.textContent);
   }
-}
-
-mobileMenuButton.addEventListener("click", toggleMobileMenu);
-mobileLinks.forEach((link) => {
-  link.addEventListener("click", closeMobileMenu);
 });
-
-setupImageFallback(siteLogo, siteLogoFallback);
-setupImageFallback(heroImage, heroImageFallback, {
-  onMissing: () => {
-    const heroMedia = heroImage.closest(".hero-media");
-    if (heroMedia) {
-      heroMedia.classList.add("image-missing");
-    }
-  },
-});
-
-form.addEventListener("submit", submitRegistration);
